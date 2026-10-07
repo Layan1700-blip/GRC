@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>الحوكمة والالتزام وإدارة المخاطر</title>
+<meta name="description" content="منصة تعليمية تقدّم أساسيات الحوكمة والالتزام وإدارة المخاطر (GRC) بطريقة مبسطة ومنظمة.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A171A;
+  --stone:#FFFFFF;
+  --paper:#FFFFFF;
+  --line:#B9C5C2;
+  --muted:#26373B;
+  --gov:#2F6F62;
+  --com:#2B4C7E;
+  --risk:#B98A1E;
+  --head:'Amiri','Traditional Arabic','Sakkal Majalla','Times New Roman',serif;
+  --body:'Noto Naskh Arabic','Simplified Arabic','Traditional Arabic','Times New Roman',serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+html,body{background:#fff}
+body{margin:0;color:var(--ink);font-family:var(--body);font-weight:500;font-size:18px;line-height:2.05}
+.shell,main,.side,.wrap,.hero,.sec,footer{background:#fff}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--com);outline-offset:3px;border-radius:4px}
+ul{margin:0;padding:0;list-style:none}
+h1,h2,h3{font-family:var(--head);font-weight:700;line-height:1.6;margin:0}
+p{margin:0 0 1rem}
+
+/* layout */
+.shell{display:grid;grid-template-columns:230px minmax(0,1fr);min-height:100vh}
+.side{position:sticky;top:0;align-self:start;height:100vh;padding:28px 24px;border-inline-end:1px solid var(--line);background:var(--paper);display:flex;flex-direction:column;gap:20px}
+.brand{font-family:var(--head);font-size:1.2rem;font-weight:700;line-height:1.5;text-decoration:none}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav a{display:flex;align-items:center;gap:10px;padding:6px 10px;text-decoration:none;color:var(--muted);font-size:.97rem;border-radius:6px;line-height:1.6}
+.nav a i{width:9px;height:9px;border-radius:50%;background:var(--line);flex:none;transition:background .2s}
+.nav a[aria-current="true"]{color:var(--ink);font-weight:700}
+.nav a[aria-current="true"] i{background:var(--c,var(--ink))}
+.side .sign{margin-top:auto;font-size:.95rem;color:var(--muted)}
+main{padding:0 clamp(20px,5vw,72px) 60px;min-width:0}
+.wrap{max-width:760px;margin-inline:auto}
+
+/* hero */
+.hero{padding:56px 0 48px;border-bottom:1px solid var(--line)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,380px);gap:40px;align-items:center;max-width:1000px;margin-inline:auto}
+.hero h1{font-size:clamp(2rem,4.6vw,3.2rem);font-weight:700;margin-bottom:18px}
+.hero .lead{font-size:1.1rem;color:var(--muted);max-width:34em}
+.hero .hint{font-size:.92rem;color:var(--muted);margin-top:22px}
+.venn{width:100%;height:auto;display:block;overflow:visible}
+.venn .c{cursor:pointer;fill:#fff;fill-opacity:.01;stroke-width:5;transition:stroke-width .2s}
+.venn g[role=button],.venn g[role=button]:focus,.venn g[role=button]:focus-visible{outline:none}
+.venn g[role=button]:focus-visible .c{stroke-width:9}
+.venn g.on .c{stroke-width:10}
+.venn text{font-family:var(--head);pointer-events:none}
+.panel{margin-top:14px;padding:14px 18px;background:var(--paper);border:1px solid var(--line);border-inline-start:5px solid var(--pc,var(--ink));border-radius:4px;font-size:.98rem;line-height:1.85;min-height:7.5em}
+.panel b{display:block;font-family:var(--head);font-size:1.1rem;margin-bottom:2px}
+
+/* sections */
+.sec{padding:56px 0 8px;--c:var(--ink)}
+.sec[data-p=gov]{--c:var(--gov)}
+.sec[data-p=com]{--c:var(--com)}
+.sec[data-p=risk]{--c:var(--risk)}
+.sec h2{font-size:clamp(1.7rem,3.4vw,2.2rem);font-weight:700;padding-inline-start:18px;border-inline-start:6px solid var(--c);margin-bottom:22px}
+.sec h3{font-size:1.25rem;margin:34px 0 10px}
+.sec .intro{font-size:1.06rem}
+.sub{color:var(--muted);font-size:.95rem;margin-top:-4px}
+
+.ticks li{position:relative;padding-inline-start:30px;margin-bottom:4px}
+.ticks li::before{content:"";position:absolute;inset-inline-start:4px;top:.72em;width:11px;height:6px;border-inline-start:2.5px solid var(--c);border-bottom:2.5px solid var(--c);transform:rotate(-45deg)}
+
+/* accordion */
+details{border-top:1px solid var(--line)}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{list-style:none;cursor:pointer;padding:12px 4px;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:1.5rem;line-height:1;color:var(--c);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{padding:0 4px 14px;margin:0;color:var(--muted)}
+
+/* definition rows */
+.rows>div{display:grid;grid-template-columns:150px 1fr;gap:6px 20px;padding:12px 0;border-top:1px solid var(--line)}
+.rows>div:last-child{border-bottom:1px solid var(--line)}
+.rows dt{font-family:var(--head);font-weight:600;font-size:1.08rem;color:var(--c)}
+.rows dd{margin:0;color:var(--ink)}
+
+/* lines of defense */
+.def{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.def div{padding:14px 18px;background:var(--paper);border:1px solid var(--line);border-inline-start:6px solid var(--c);border-radius:4px}
+.def div:nth-child(1){margin-inline-end:0}
+.def div:nth-child(2){margin-inline-end:28px}
+.def div:nth-child(3){margin-inline-end:56px}
+.def b{font-family:var(--head);display:block;font-size:1.05rem}
+.def span{color:var(--muted);font-size:.97rem}
+
+/* steps (real sequences) */
+.steps{counter-reset:s;display:flex;flex-direction:column}
+.steps li{counter-increment:s;position:relative;padding:4px 56px 18px 0;min-height:56px}
+.steps li::before{content:counter(s);position:absolute;inset-inline-start:auto;right:0;top:2px;width:38px;height:38px;border-radius:50%;background:var(--c);color:#fff;display:grid;place-items:center;font-family:var(--head);font-weight:600}
+.steps li::after{content:"";position:absolute;right:18px;top:44px;bottom:2px;width:2px;background:var(--line)}
+.steps li:last-child::after{display:none}
+.steps b{font-family:var(--head);font-size:1.1rem;display:block}
+.steps span{color:var(--muted)}
+
+/* chips */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips li{padding:4px 14px;border:1.5px solid var(--c);border-radius:999px;font-size:.96rem;background:var(--paper)}
+
+.note{margin-top:22px;padding:14px 18px;background:var(--paper);border:1px solid var(--line);border-inline-start:5px solid var(--c);border-radius:4px}
+.note b{font-family:var(--head)}
+
+/* certificates */
+.cert{display:grid;grid-template-columns:110px 1fr;gap:6px 20px;padding:18px 0;border-top:1px solid var(--line);align-items:start}
+.cert:last-of-type{border-bottom:1px solid var(--line)}
+.cert .ac{font-family:var(--head);font-weight:700;font-size:1.7rem;color:var(--c);line-height:1.3}
+.cert b{display:block}
+.cert small{color:var(--muted);font-size:.95rem}
+
+/* learning path */
+.path li{margin-bottom:8px}
+.path button{all:unset;box-sizing:border-box;display:flex;width:100%;align-items:center;gap:14px;padding:12px 16px;background:var(--paper);border-radius:6px;cursor:pointer;border:1.5px solid var(--line)}
+.path button:focus-visible{outline:3px solid var(--com);outline-offset:2px}
+.path .n{width:34px;height:34px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;font-family:var(--head);flex:none;transition:all .2s}
+.path button[aria-pressed=true]{border-color:var(--gov)}
+.path button[aria-pressed=true] .n{background:var(--gov);border-color:var(--gov);color:#fff}
+.path button[aria-pressed=true] .t{color:var(--muted);text-decoration:line-through;text-decoration-thickness:1px}
+.pbar{height:6px;background:var(--line);border-radius:3px;margin:0 0 16px;overflow:hidden}
+.pbar i{display:block;height:100%;width:0;background:var(--gov);transition:width .3s}
+.pcount{font-size:.95rem;color:var(--muted);margin-bottom:6px}
+
+/* glossary */
+.search{width:100%;padding:12px 16px;font:inherit;border:1.5px solid var(--line);border-radius:6px;background:var(--paper);color:var(--ink);margin-bottom:12px}
+.search:focus-visible{outline:3px solid var(--com);outline-offset:2px}
+.gl>div[hidden]{display:none}
+.gl dt{font-family:var(--head)}
+.gl .en{color:var(--muted);font-family:var(--body);font-size:.9rem;margin-inline-start:8px;direction:ltr;display:inline-block}
+.empty{color:var(--muted);padding:12px 0}
+
+.src li{padding:10px 0;border-top:1px solid var(--line)}
+.src li:last-child{border-bottom:1px solid var(--line)}
+.src a{color:var(--com);text-underline-offset:4px}
+footer{margin-top:72px;padding-top:28px;border-top:1px solid var(--line);text-align:center}
+footer p{font-family:var(--head);font-size:1.5rem;font-weight:700;margin:0}
+
+/* mobile */
+@media (max-width:860px){
+  .shell{display:block}
+  .side{position:sticky;top:0;z-index:5;height:auto;flex-direction:row;align-items:center;padding:8px 14px;gap:12px;border-inline-end:0;border-bottom:1px solid var(--line)}
+  .brand{display:none}
+  .nav{flex-direction:row;overflow-x:auto;gap:4px;scrollbar-width:none;flex:1}
+  .nav::-webkit-scrollbar{display:none}
+  .nav a{white-space:nowrap;padding:4px 12px;border:1px solid var(--line);border-radius:999px}
+  .nav a i{display:none}
+  .side .sign{display:none}
+  html{scroll-padding-top:64px}
+  .hero{padding-top:32px}
+  .hero-grid{grid-template-columns:1fr;gap:24px}
+  .rows>div{grid-template-columns:1fr}
+  .cert{grid-template-columns:1fr}
+  .def div:nth-child(n){margin-inline-end:0}
+  body{font-size:16.5px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<aside class="side">
+  <a class="brand" href="#home">الحوكمة والالتزام<br>وإدارة المخاطر</a>
+  <nav class="nav" id="nav" aria-label="أقسام الموقع">
+    <a href="#home" style="--c:var(--ink)"><i></i>الرئيسية</a>
+    <a href="#governance" style="--c:var(--gov)"><i></i>الحوكمة</a>
+    <a href="#compliance" style="--c:var(--com)"><i></i>الالتزام</a>
+    <a href="#risk" style="--c:var(--risk)"><i></i>إدارة المخاطر</a>
+    <a href="#control" style="--c:var(--ink)"><i></i>الرقابة والمراجعة</a>
+    <a href="#grc" style="--c:var(--ink)"><i></i>مفهوم GRC</a>
+    <a href="#saudi" style="--c:var(--gov)"><i></i>السياق السعودي</a>
+    <a href="#certs" style="--c:var(--com)"><i></i>الشهادة المهنية</a>
+    <a href="#path" style="--c:var(--gov)"><i></i>المسار التعليمي</a>
+    <a href="#terms" style="--c:var(--risk)"><i></i>المصطلحات</a>
+    <a href="#sources" style="--c:var(--ink)"><i></i>المصادر</a>
+  </nav>
+  <div class="sign">لـيان بادي ⚖️</div>
+</aside>
+
+<main>
+
+<!-- الرئيسية -->
+<header class="hero" id="home">
+  <div class="hero-grid">
+    <div>
+      <h1>الحوكمة والالتزام وإدارة المخاطر</h1>
+      <p class="lead">منصة تعليمية تقدّم المعرفة الأساسية في مجالات الحوكمة والالتزام وإدارة المخاطر بطريقة مبسطة ومنظمة، لتكون نقطة انطلاق للطلاب الجامعيين والخريجين والمهتمين ببناء مسارهم المهني في مجال GRC.</p>
+      <p class="hint">اضغطوا على أي دائرة في الرسم لمعرفة معناها.</p>
+    </div>
+    <div>
+      <svg class="venn" viewBox="0 0 360 330" role="group" aria-label="رسم يوضح تداخل الحوكمة والمخاطر والالتزام">
+        <g role="button" tabindex="0" data-k="gov" aria-label="الحوكمة">
+          <circle class="c" cx="180" cy="108" r="96" stroke="#2F6F62"/>
+        </g>
+        <g role="button" tabindex="0" data-k="com" aria-label="الالتزام">
+          <circle class="c" cx="122" cy="206" r="96" stroke="#2B4C7E"/>
+        </g>
+        <g role="button" tabindex="0" data-k="risk" aria-label="إدارة المخاطر">
+          <circle class="c" cx="238" cy="206" r="96" stroke="#B98A1E"/>
+        </g>
+        <text x="180" y="64" text-anchor="middle" font-size="21" font-weight="700" fill="#0A171A">الحوكمة</text>
+        <text x="92" y="244" text-anchor="middle" font-size="21" font-weight="700" fill="#0A171A">الالتزام</text>
+        <text x="268" y="244" text-anchor="middle" font-size="21" font-weight="700" fill="#0A171A">المخاطر</text>
+        <g role="button" tabindex="0" data-k="grc" aria-label="GRC">
+          <circle cx="180" cy="178" r="30" fill="#fff" stroke="#10262B" stroke-width="2" class="c2" style="cursor:pointer"/>
+          <text x="180" y="186" text-anchor="middle" font-size="22" font-weight="700" fill="#10262B" direction="ltr">GRC</text>
+        </g>
+      </svg>
+      <div class="panel" id="panel" aria-live="polite"></div>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<!-- الحوكمة -->
+<section class="sec" id="governance" data-p="gov">
+  <h2>الحوكمة (Governance)</h2>
+  <p class="intro">مجموعة من المبادئ والسياسات والإجراءات التي تساعد المنظمات على إدارة أعمالها بفعالية ومسؤولية، بتحديد الصلاحيات والمسؤوليات وتعزيز الشفافية والمساءلة.</p>
+
+  <h3>أهميتها</h3>
+  <ul class="ticks">
+    <li>رفع مستوى الشفافية.</li>
+    <li>تعزيز المسؤولية والمساءلة.</li>
+    <li>تحسين جودة القرارات.</li>
+    <li>حماية حقوق أصحاب المصلحة.</li>
+    <li>دعم استدامة المنظمة ونموها.</li>
+  </ul>
+
+  <h3>العناصر الأساسية</h3>
+  <details><summary>مجلس الإدارة</summary><p>المسؤول عن التوجيه الاستراتيجي والرقابة على الأداء.</p></details>
+  <details><summary>لجان المجلس</summary><p>مثل لجنة المراجعة ولجنة الترشيحات والمكافآت، وتتولى مهام رقابية متخصصة.</p></details>
+  <details><summary>السياسات والإجراءات</summary><p>الأنظمة الداخلية التي تنظم العمل واتخاذ القرارات.</p></details>
+  <details><summary>الإفصاح والشفافية</summary><p>إتاحة المعلومات المهمة لأصحاب المصلحة في وقتها وبوضوح.</p></details>
+  <details><summary>أصحاب المصلحة</summary><p>الموظفون والعملاء والمستثمرون وغيرهم ممن يتأثرون بأعمال المنظمة.</p></details>
+
+  <h3>مبادئ منظمة OECD لحوكمة الشركات</h3>
+  <p>مرجع دولي يقدّم مبادئ للحوكمة الرشيدة، منها: حماية حقوق المساهمين، والمعاملة العادلة، والإفصاح والشفافية، ومسؤوليات مجلس الإدارة.</p>
+
+  <h3>نموذج الخطوط الثلاثة (IIA، إصدار 2020)</h3>
+  <p>وهو النموذج المعتمد الذي حلّ محل مفهوم «خطوط الدفاع الثلاثة».</p>
+  <div class="def">
+    <div><b>الخط الأول</b><span>الأدوار الأقرب لتقديم المنتجات والخدمات للعملاء، وهي المسؤولة عن إدارة المخاطر.</span></div>
+    <div><b>الخط الثاني</b><span>أدوار تقدّم المساعدة والخبرة والمتابعة في إدارة المخاطر، ومنها الالتزام وأمن المعلومات.</span></div>
+    <div><b>الخط الثالث</b><span>المراجعة الداخلية، وهي مستقلة عن الإدارة وتقدّم تقييمًا موضوعيًا.</span></div>
+  </div>
+</section>
+
+<!-- الالتزام -->
+<section class="sec" id="compliance" data-p="com">
+  <h2>الالتزام (Compliance)</h2>
+  <p class="intro">التأكد من أن المنظمة تعمل وفق الأنظمة واللوائح والسياسات الداخلية والمعايير المهنية والأخلاقية.</p>
+
+  <h3>أهميته</h3>
+  <ul class="ticks">
+    <li>تقليل المخالفات والمخاطر النظامية.</li>
+    <li>حماية سمعة المنظمة.</li>
+    <li>تعزيز النزاهة وثقافة العمل المسؤول.</li>
+    <li>ضمان تطبيق المتطلبات النظامية.</li>
+  </ul>
+
+  <h3>عناصر برنامج الالتزام</h3>
+  <ol class="steps">
+    <li><b>تحديد المتطلبات</b><span>النظامية والتنظيمية.</span></li>
+    <li><b>تقييم المخاطر</b><span>مخاطر عدم الالتزام.</span></li>
+    <li><b>إعداد السياسات والإجراءات</b><span></span></li>
+    <li><b>نشر الوعي والتدريب</b><span></span></li>
+    <li><b>المراقبة والتطوير المستمر</b><span></span></li>
+  </ol>
+
+  <h3>أمثلة على مجالات الالتزام في السعودية</h3>
+  <ul class="chips">
+    <li>نظام حماية البيانات الشخصية (PDPL) ولائحته التنفيذية</li>
+    <li>لائحة حوكمة الشركات الصادرة عن هيئة السوق المالية</li>
+  </ul>
+
+  <div class="note"><b>معيار ISO 37301</b><br>معيار دولي يوضح متطلبات إنشاء نظام إدارة الالتزام وتطويره وتحسينه داخل المنظمات.</div>
+</section>
+
+<!-- إدارة المخاطر -->
+<section class="sec" id="risk" data-p="risk">
+  <h2>إدارة المخاطر (Risk Management)</h2>
+  <p class="intro">عملية تحديد المخاطر التي قد تؤثر على أهداف المنظمة، وتحليلها وتقييمها، ثم وضع الإجراءات المناسبة للتعامل معها.</p>
+
+  <h3>أهميتها</h3>
+  <ul class="ticks">
+    <li>الاستعداد للتحديات المستقبلية.</li>
+    <li>تقليل الخسائر المحتملة.</li>
+    <li>دعم اتخاذ القرارات.</li>
+    <li>تحسين قدرة المنظمة على تحقيق أهدافها.</li>
+  </ul>
+
+  <h3>أنواع المخاطر</h3>
+  <dl class="rows" style="margin:0">
+    <div><dt>التشغيلية</dt><dd>ناتجة عن العمليات اليومية أو الأخطاء الداخلية.</dd></div>
+    <div><dt>المالية</dt><dd>مرتبطة بالخسائر أو التقلبات المالية.</dd></div>
+    <div><dt>الاستراتيجية</dt><dd>تؤثر على الخطط والأهداف بعيدة المدى.</dd></div>
+    <div><dt>مخاطر الالتزام</dt><dd>ناتجة عن عدم الالتزام بالأنظمة أو السياسات.</dd></div>
+    <div><dt>التقنية</dt><dd>مرتبطة بالتقنية والأنظمة الرقمية.</dd></div>
+  </dl>
+
+  <h3>دورة إدارة المخاطر</h3>
+  <ol class="steps">
+    <li><b>تحديد المخاطر</b><span>معرفة المخاطر المحتملة.</span></li>
+    <li><b>تحليل المخاطر</b><span>تقدير احتمالية الحدوث والأثر.</span></li>
+    <li><b>تقييم المخاطر</b><span>تحديد أولوية كل خطر.</span></li>
+    <li><b>معالجة المخاطر</b><span>اختيار الأسلوب المناسب.</span></li>
+    <li><b>المراقبة والمراجعة</b><span>المتابعة وتحديث الإجراءات باستمرار.</span></li>
+  </ol>
+
+  <h3>خيارات معالجة المخاطر</h3>
+  <dl class="rows" style="margin:0">
+    <div><dt>التجنّب</dt><dd>إيقاف النشاط المسبب للخطر.</dd></div>
+    <div><dt>التخفيف</dt><dd>تقليل احتمالية الخطر أو أثره.</dd></div>
+    <div><dt>النقل</dt><dd>تحويل الأثر لطرف آخر، كالتأمين.</dd></div>
+    <div><dt>القبول</dt><dd>تحمّل الخطر عندما يكون ضمن الحدود المقبولة.</dd></div>
+  </dl>
+
+  <h3>مفاهيم أساسية</h3>
+  <dl class="rows" style="margin:0">
+    <div><dt>سجل المخاطر</dt><dd>وثيقة تدوّن فيها المخاطر وتقييمها وإجراءات معالجتها ومسؤولها.</dd></div>
+    <div><dt>شهية المخاطر</dt><dd>مستوى المخاطر الذي ترغب المنظمة في تحمّله لتحقيق أهدافها.</dd></div>
+  </dl>
+
+  <h3>الأطر والمعايير</h3>
+  <dl class="rows" style="margin:0">
+    <div><dt>ISO 31000</dt><dd>إرشادات دولية تقدّم مبادئ وإطارًا وعملية لإدارة المخاطر.</dd></div>
+    <div><dt>COSO ERM</dt><dd>إطار لإدارة المخاطر المؤسسية وربطها بالاستراتيجية والأداء.</dd></div>
+  </dl>
+</section>
+
+<!-- الرقابة -->
+<section class="sec" id="control">
+  <h2>الرقابة الداخلية والمراجعة الداخلية</h2>
+
+  <h3>الرقابة الداخلية</h3>
+  <p>إجراءات وسياسات تساعد المنظمة على تحقيق أهدافها وتقليل الأخطاء والمخاطر وحماية الأصول وضمان موثوقية التقارير.</p>
+  <p>تهدف الرقابة الداخلية إلى توفير تأكيد معقول لتحقيق أهداف المنظمة، وليس ضمانًا مطلقًا.</p>
+
+  <h3>إطار COSO للرقابة الداخلية</h3>
+  <p>إطار عالمي واسع الاعتماد، وله خمسة مكونات:</p>
+  <ul class="chips" style="--c:var(--ink)">
+    <li>بيئة الرقابة</li>
+    <li>تقييم المخاطر</li>
+    <li>أنشطة الرقابة</li>
+    <li>المعلومات والاتصال</li>
+    <li>المتابعة</li>
+  </ul>
+
+  <h3>المراجعة الداخلية</h3>
+  <p>نشاط مستقل وموضوعي يقدّم تأكيدًا واستشارات لتحسين الحوكمة وإدارة المخاطر والرقابة.</p>
+</section>
+
+<!-- GRC -->
+<section class="sec" id="grc">
+  <h2>مفهوم GRC</h2>
+  <p class="intro" style="direction:ltr;text-align:right;font-family:var(--head);font-size:1.2rem">Governance – Risk – Compliance</p>
+  <dl class="rows" style="margin:0">
+    <div style="--c:var(--gov)"><dt>الحوكمة</dt><dd>تحدد طريقة الإدارة واتخاذ القرارات والمسؤوليات.</dd></div>
+    <div style="--c:var(--risk)"><dt>إدارة المخاطر</dt><dd>تحدد المخاطر وكيفية التعامل معها.</dd></div>
+    <div style="--c:var(--com)"><dt>الالتزام</dt><dd>يضمن الالتزام بالأنظمة والسياسات والمعايير.</dd></div>
+  </dl>
+  <p style="margin-top:18px">تكامل هذه المجالات يساعد المؤسسات على تحقيق أهدافها بطريقة أكثر تنظيمًا وكفاءة.</p>
+</section>
+
+<!-- السعودية -->
+<section class="sec" id="saudi" data-p="gov">
+  <h2>السياق في المملكة العربية السعودية</h2>
+  <dl class="rows" style="margin:0">
+    <div><dt>هيئة السوق المالية</dt><dd>تصدر لائحة حوكمة الشركات الخاصة بالشركات المساهمة المدرجة في السوق المالية.</dd></div>
+    <div><dt>نظام الشركات</dt><dd>صدر بالمرسوم الملكي رقم (م/132) وتاريخ 1/12/1443هـ، وأعلنت وزارة التجارة وهيئة السوق المالية بدء سريانه ولوائحه التنفيذية في 19 يناير 2023م، ويوفّر إطارًا لحوكمة الشركات.</dd></div>
+    <div><dt>سدايا</dt><dd>الهيئة السعودية للبيانات والذكاء الاصطناعي، وتتولى الإشراف على تطبيق نظام حماية البيانات الشخصية الصادر بالمرسوم الملكي رقم (م/19) وتاريخ 9/2/1443هـ وتعديلاته.</dd></div>
+    <div><dt>مكتب إدارة البيانات الوطنية (NDMO)</dt><dd>الجهة التنظيمية والمرجعية الوطنية لإدارة البيانات وحوكمتها، ويتولى وضع سياسات الحوكمة ومعاييرها وضوابطها، ويرتبط تنظيميًا بسدايا.</dd></div>
+    <div><dt>رؤية 2030</dt><dd>تنص على وطن طموح تديره حكومة فاعلة عالية الأداء، تتسم بالشفافية، وتخضع للمساءلة على جميع المستويات.</dd></div>
+  </dl>
+  <p class="sub" style="margin-top:14px">المصادر الرسمية لهذا القسم في قسم «المصادر» أسفل الصفحة.</p>
+</section>
+
+<!-- الشهادة -->
+<section class="sec" id="certs" data-p="com">
+  <h2>الشهادة المهنية</h2>
+  <p class="intro">نكتفي بشهادة واحدة لأنها تغطي المجالات الثلاثة معًا، وتركّز على التكامل بينها بدل التخصص في جانب واحد.</p>
+  <div class="cert"><div class="ac" dir="ltr">GRCP</div><div><b>Governance, Risk and Compliance Professional</b><small>شهادة متخصصة في الحوكمة وإدارة المخاطر والالتزام (GRC)، تمنحها OCEG، وتُعد حجر الأساس في شهاداتها المهنية وتركز على التكامل بين هذه المجالات.</small></div></div>
+</section>
+
+<!-- المسار -->
+<section class="sec" id="path" data-p="gov">
+  <h2>المسار التعليمي للمبتدئين</h2>
+  <p class="pcount" id="pcount"></p>
+  <div class="pbar" aria-hidden="true"><i id="pfill"></i></div>
+  <ol class="path" style="margin:0;padding:0;list-style:none" id="pathList">
+    <li><button type="button" aria-pressed="false"><span class="n">1</span><span class="t">أساسيات الحوكمة</span></button></li>
+    <li><button type="button" aria-pressed="false"><span class="n">2</span><span class="t">أساسيات الالتزام</span></button></li>
+    <li><button type="button" aria-pressed="false"><span class="n">3</span><span class="t">مبادئ إدارة المخاطر</span></button></li>
+    <li><button type="button" aria-pressed="false"><span class="n">4</span><span class="t">الرقابة والمراجعة الداخلية</span></button></li>
+    <li><button type="button" aria-pressed="false"><span class="n">5</span><span class="t">فهم مفهوم GRC</span></button></li>
+    <li><button type="button" aria-pressed="false"><span class="n">6</span><span class="t">التعرف على شهادة GRCP</span></button></li>
+    <li><button type="button" aria-pressed="false"><span class="n">7</span><span class="t">الاستعداد للمجال الوظيفي</span></button></li>
+  </ol>
+</section>
+
+<!-- المصطلحات -->
+<section class="sec" id="terms" data-p="risk">
+  <h2>المصطلحات الأساسية</h2>
+  <input class="search" id="q" type="search" placeholder="ابحثوا عن مصطلح" aria-label="البحث في المصطلحات">
+  <dl class="rows gl" id="gl" style="margin:0">
+    <div><dt>الحوكمة<span class="en">Governance</span></dt><dd>نظام يحدد كيفية إدارة المنظمة واتخاذ القرارات.</dd></div>
+    <div><dt>الالتزام<span class="en">Compliance</span></dt><dd>التأكد من اتباع الأنظمة والسياسات والمعايير.</dd></div>
+    <div><dt>إدارة المخاطر<span class="en">Risk Management</span></dt><dd>تحديد المخاطر وتحليلها ومعالجتها.</dd></div>
+    <div><dt>شهية المخاطر<span class="en">Risk Appetite</span></dt><dd>مستوى المخاطر الذي تقبله المنظمة.</dd></div>
+    <div><dt>الرقابة الداخلية<span class="en">Internal Control</span></dt><dd>إجراءات تساعد على تحقيق الأهداف وتقليل المخاطر.</dd></div>
+    <div><dt>المراجعة الداخلية<span class="en">Internal Audit</span></dt><dd>تأكيد مستقل وموضوعي على فعالية الحوكمة والمخاطر والرقابة.</dd></div>
+    <div><dt>GRC<span class="en">Governance, Risk, Compliance</span></dt><dd>منهج يجمع الحوكمة وإدارة المخاطر والالتزام.</dd></div>
+  </dl>
+  <p class="empty" id="none" hidden>لا يوجد مصطلح مطابق. جرّبوا كلمة أخرى.</p>
+</section>
+
+<!-- المصادر -->
+<section class="sec" id="sources">
+  <h2>المصادر</h2>
+  <h3>المملكة العربية السعودية</h3>
+  <ul class="src">
+    <li><a href="https://cma.gov.sa/RulesRegulations/Regulations/Documents/CorpGovReg.pdf" target="_blank" rel="noopener">هيئة السوق المالية: لائحة حوكمة الشركات</a></li>
+    <li><a href="https://cma.gov.sa/RulesRegulations/Companies_Law/Pages/default.aspx" target="_blank" rel="noopener">هيئة السوق المالية: نظام الشركات</a></li>
+    <li><a href="https://mc.gov.sa/ar/mediacenter/News/Pages/19-01-23-01.aspx" target="_blank" rel="noopener">وزارة التجارة: بدء تطبيق نظام الشركات الجديد ولوائحه التنفيذية</a></li>
+    <li><a href="https://laws.boe.gov.sa/boelaws/laws/lawdetails/b7cfae89-828e-4994-b167-adaa00e37188/1" target="_blank" rel="noopener">هيئة الخبراء بمجلس الوزراء: نظام حماية البيانات الشخصية</a></li>
+    <li><a href="https://dgp.sdaia.gov.sa/wps/portal/pdp/Registration/private" target="_blank" rel="noopener">سدايا: منصة حوكمة البيانات الوطنية</a></li>
+    <li><a href="https://saudipedia.com/مكتب-إدارة-البيانات-الوطنية" target="_blank" rel="noopener">موسوعة السعودية: مكتب إدارة البيانات الوطنية</a></li>
+    <li><a href="https://www.vision2030.gov.sa/ar/" target="_blank" rel="noopener">رؤية السعودية 2030</a></li>
+  </ul>
+  <h3>المعايير والأطر الدولية</h3>
+  <ul class="src">
+    <li><a href="https://www.theiia.org/globalassets/site/communication/2020/three-lines-model-updated.pdf" target="_blank" rel="noopener">معهد المراجعين الداخليين (IIA): The Three Lines Model</a></li>
+    <li><a href="https://legalinstruments.oecd.org/public/doc/322/322.en.pdf" target="_blank" rel="noopener">OECD: مبادئ حوكمة الشركات</a></li>
+    <li><a href="https://www.iso.org/standard/75080.html" target="_blank" rel="noopener">ISO 37301: أنظمة إدارة الالتزام</a></li>
+    <li><a href="https://www.iso.org/iso-31000-risk-management.html" target="_blank" rel="noopener">ISO 31000: إدارة المخاطر</a></li>
+    <li><a href="https://www.coso.org/" target="_blank" rel="noopener">COSO: Internal Control Framework</a></li>
+    <li><a href="https://www.gfoa.org/internal-control-framework" target="_blank" rel="noopener">GFOA: توصية باعتماد إطار COSO للرقابة الداخلية</a></li>
+  </ul>
+  <h3>الشهادة المهنية</h3>
+  <ul class="src">
+    <li><a href="https://oceg.org/professionalcertifications" target="_blank" rel="noopener">OCEG: شهادة GRCP</a></li>
+  </ul>
+</section>
+
+<footer>
+  <p>لـيان بادي ⚖️</p>
+</footer>
+
+</div>
+</main>
+</div>
+
+<script>
+/* الرسم التفاعلي */
+(function(){
+  var data={
+    gov:{t:'الحوكمة',c:'#2F6F62',d:'تحدد طريقة الإدارة واتخاذ القرارات والمسؤوليات داخل المنظمة.'},
+    com:{t:'الالتزام',c:'#2B4C7E',d:'يضمن أن المنظمة تتبع الأنظمة والسياسات والمعايير.'},
+    risk:{t:'إدارة المخاطر',c:'#B98A1E',d:'تحدد المخاطر المحتملة وكيفية التعامل معها.'},
+    grc:{t:'GRC',c:'#10262B',d:'منهج يجمع الحوكمة وإدارة المخاطر والالتزام. تكاملها يساعد المؤسسات على تحقيق أهدافها بطريقة أكثر تنظيمًا وكفاءة.'}
+  };
+  var panel=document.getElementById('panel');
+  var groups=document.querySelectorAll('.venn g[role=button]');
+  function show(k){
+    var o=data[k];
+    panel.style.setProperty('--pc',o.c);
+    panel.innerHTML='<b></b><span></span>';
+    panel.firstChild.textContent=o.t;
+    panel.lastChild.textContent=o.d;
+    groups.forEach(function(g){g.classList.toggle('on',g.dataset.k===k)});
+  }
+  groups.forEach(function(g){
+    g.addEventListener('click',function(){show(g.dataset.k)});
+    g.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();show(g.dataset.k)}});
+  });
+  show('grc');
+})();
+
+/* القائمة الجانبية: تحديد القسم الحالي */
+(function(){
+  var links=[].slice.call(document.querySelectorAll('#nav a'));
+  var map={};
+  links.forEach(function(a){map[a.getAttribute('href').slice(1)]=a});
+  var ids=Object.keys(map);
+  function mark(id){links.forEach(function(a){a.removeAttribute('aria-current')});if(map[id]){map[id].setAttribute('aria-current','true')}}
+  var obs=new IntersectionObserver(function(es){
+    es.forEach(function(e){if(e.isIntersecting){mark(e.target.id)}});
+  },{rootMargin:'-20% 0px -70% 0px'});
+  ids.forEach(function(id){var el=document.getElementById(id);if(el)obs.observe(el)});
+  mark('home');
+})();
+
+/* المسار التعليمي */
+(function(){
+  var btns=[].slice.call(document.querySelectorAll('#pathList button'));
+  var fill=document.getElementById('pfill'),cnt=document.getElementById('pcount');
+  function upd(){
+    var n=btns.filter(function(b){return b.getAttribute('aria-pressed')==='true'}).length;
+    fill.style.width=(n/btns.length*100)+'%';
+    cnt.textContent='أنجزتم '+n+' من '+btns.length+' مراحل. اضغطوا على المرحلة لتعليمها كمنجزة.';
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    b.setAttribute('aria-pressed',b.getAttribute('aria-pressed')==='true'?'false':'true');upd();
+  })});
+  upd();
+})();
+
+/* البحث في المصطلحات */
+(function(){
+  var q=document.getElementById('q'),rows=[].slice.call(document.querySelectorAll('#gl > div')),none=document.getElementById('none');
+  q.addEventListener('input',function(){
+    var v=q.value.trim().toLowerCase(),shown=0;
+    rows.forEach(function(r){
+      var ok=!v||r.textContent.toLowerCase().indexOf(v)>-1;
+      r.hidden=!ok;if(ok)shown++;
+    });
+    none.hidden=shown>0;
+  });
+})();
+</script>
+</body>
+</html>
